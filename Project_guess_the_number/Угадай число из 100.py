@@ -28,17 +28,19 @@ def game_core_v3(number: int = 1) -> int:
         int: Число попыток
     """
     count = 0                                                   # счетчик попыток поиска числа
-    min_value, max_value = 1, 100
+    min_value, max_value = 0, 101
     predict_number = np.random.randint(1, 101)                  # предполагаемое число
-
-    while predict_number != number:                             # считаем кол-во попыток найти число с помощью цикла
-        count += 1
-        if predict_number > number:
+    while True: 
+        predict_number != number                                
+        count += 1                                              # считаем кол-во попыток найти число с помощью цикла
+        if predict_number == number: 
+            break                                               # выход из цикла если угадали число
+        elif predict_number > number:
             max_value = predict_number                          # уменьшаем диапазон поиска в цикле
             predict_number = (max_value + min_value)//2         # берем середину от нового диапазона и начинаем цикл по новой с целью минимизации кол-ва попыток
-        elif predict_number < number:
-            min_value = predict_number
-            predict_number = (max_value + min_value)//2
+        elif predict_number < number:                           
+            min_value = predict_number                          # уменьшаем диапазон поиска в цикле 
+            predict_number = (max_value + min_value)//2         # берем середину от нового диапазона и начинаем цикл по новой с целью минимизации кол-ва попыток
 
     return count
 
